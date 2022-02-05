@@ -53,28 +53,45 @@ def new_account(first, last, email):
         request()
 
 def view_account_info(email):
+    """GET request -- Returns the user's account information based on the email provided
+
+    Args:
+        email (string): the email address provided and used to search the API for the account info.
+    """
     response = requests.get(url)
-    account_info = response.json()
-    account = []
+    data = response.json()
+    info = []
     time.sleep(1)
-    for data in account_info['data']:
-        if data['email'] == email:
-            account.append(data)
-    if account == []:
-        print("Sorry, it doesn't appear you have an account. Try creating one with option 1.")
+    for account in data['data']:
+        if account['email'] == email:
+            info.append(account)
+    # If no account can be yielded
+    if info == []:
+        print("It doesn't appear you have an account based on the email address provided. Try again or try creating one with option 1.")
         quit()
+    # If email is accessible in the API -- if it exists
     else:
         print("Here is the info for the account associated with your email address: \n")
-        print(account[0])
+        print(account)
 
 def update_account(email):
+    """PUT request -- This function lets the user update the account info based
+    on the email provided
+
+    Args:
+        email (string): the email address provided and used to search the API for the account info.
+    """
+    # GETs the account info from the email provided and prints it
     view_account_info(email)
+    # GET the ID of the account - this is required in order to update the account
     id = get_id(email)
+    # User input
     print('Please update your information...')
     time.sleep(1)
     first = input('What is your first name? ')
     last = input('What is your last name? ')
     new_email = input('What is your email address? ')
+    # Updates the account based on the ID and user input provided
     body = {
         'id': id,
         'first_name': first,
@@ -83,27 +100,51 @@ def update_account(email):
     }
     put_url = f'http://demo.codingnomads.co:8080/tasks_api/users/{id}'
     response = requests.put(put_url, json=body)
+    # Prints successful -- will only get this far if the email exists (see view_account_info() function)
     print(response.status_code)
-    print('Your account has been successfully updated.')
+    if response.status_code == 201:
+        print('Your account has been successfully updated.')
+    else:
+        print('Looks like there was an error updating the account. Please try again')
+        request()
+
 
 def delete_task(email):
+    """DELETE request - deletes the user's account based on the email provided but first checks to
+    make sure it is the right account before the user deletes it.
+
+    Args:
+        email (string): the email address provided and used to search the API for the account info.
+    """
+    # GETs the account info from the email provided and prints it
     view_account_info(email)
+    # GET the ID of the account - this is required in order to delete the account
     id = get_id(email)
+    # Loop to confirm the user wants to delete the account based on the info printed, or not.
     while True:
         verify = input('If this is correct, hit the "enter" key now to delete your account. Otherwise, type "quit" to enter a new one... ').lower()
+        # To quit the request -- it will restart the process
         if verify == 'quit':
             request()
+        # Hit enter/return to move forward with the DELETE request
         elif verify == '':
+            # The call to the API, deletes the account based on the ID returned earlier (see get_id())
             response = requests.delete(url + f'/{id}')
             time.sleep(1)
             print(response.status_code)
             print(f'Successfully deleted account of "{email}" email address.')
             quit()
+        # If "quit" is not typed, nor enter not clicked, it will ask again
         else:
             continue
 
 def request():
-    make_a_request = input('''Greetings, please select an action:
+    """Running request runs the application to complete the API requests given the user's input.
+    """
+    while True:
+
+    # Input to let the user make a request
+        make_a_request = input('''Greetings, please select an action:
 Please select from the following options (enter the number of the action you'd like to take):
 1) Create a new account (POST)
 2) View your account info. (GET)
@@ -111,7 +152,7 @@ Please select from the following options (enter the number of the action you'd l
 4) Delete a task (DELETE)
 ''')
 
-    while make_a_request:
+        # POST request
         if make_a_request == '1':
             print('Great, I will help you make an account.')
             time.sleep(1)
@@ -121,6 +162,7 @@ Please select from the following options (enter the number of the action you'd l
             new_account(first, last, email)
             quit()
 
+        # GET request
         if make_a_request == '2':
             print('I can help you view your account information but will need some information from you.')
             time.sleep(1)
@@ -128,18 +170,23 @@ Please select from the following options (enter the number of the action you'd l
             view_account_info(email)
             quit()
 
+        # PUT request
         if make_a_request == '3':
             print("I can help update your account information.")
             email = input('Let me find your account information. What is your email address? ')
             update_account(email)
             quit()
 
+        # DELETE request
         if make_a_request == '4':
             print('You would like to delete your account. To do so I can look up your account based on your email address.')
             time.sleep(1)
             email = input('What is your email address? ')
             delete_task(email)
             quit()
+
+        else:
+            continue
 
 
 request()
