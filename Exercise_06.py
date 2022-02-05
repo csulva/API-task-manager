@@ -1,45 +1,52 @@
-'''
-Create an application that interfaces with the user via the CLI - prompt the user with a menu such as:
+# API account manager to update API information from the URL
 
-Please select from the following options (enter the number of the action you'd like to take):
-1) Create a new account (POST)
-2) View all your tasks (GET)
-3) View your completed tasks (GET)
-4) View only your incomplete tasks (GET)
-5) Create a new task (POST)
-6) Update an existing task (PATCH/PUT)
-7) Delete a task (DELETE)
-
-It is your responsibility to build out the application to handle all menu options above.
-'''
-
+# Imports
 import requests
 import time
 url = 'http://demo.codingnomads.co:8080/tasks_api/users'
 
 def get_id(email):
+    """Function used to return the user's ID based on the email provided
+
+    Args:
+        email (string): the email address provided and used to search the API for the corresponding ID
+
+    Returns:
+        int: ID in the API account
+    """
     response = requests.get(url)
-    account_info = response.json()
-    for accounts in account_info['data']:
+    data = response.json()
+    for accounts in data['data']:
         if accounts['email'] == email:
             id = accounts['id']
     return id
 
 def new_account(first, last, email):
+    """POST request -- Creates a new account for the user based on the credentials provided.
+
+    Args:
+        first (string): First name for the account
+        last (string): Last name for the account
+        email (string): Email for the account
+    """
+    # Info to be added to the API. User's ID is created automatically
     body = {
     'first_name': first,
     'last_name': last,
     'email': email,
     }
     response = requests.post(url, json=body)
+    # If email is already in use
     if response.status_code == 400:
         time.sleep(1)
         print('Email address is already in use. Please try again.\n')
         request()
+    # If POST is successful
     elif response.status_code == 201:
         time.sleep(1)
         print(response.status_code)
         print(f'Account successfully created with email address "{email}"')
+    # Other errors
     else:
         time.sleep(1)
         print('Sorry, there was an error. Please try again.\n')
