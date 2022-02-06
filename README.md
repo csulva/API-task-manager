@@ -6,11 +6,17 @@ The API Account Manager is a command-line application to help you create or main
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
-```bash
-pip install foobar
+```python
+import requests
+import time
 ```
 
 ## Usage
+
+
+```python
+url = 'http://demo.codingnomads.co:8080/tasks_api/users'
+```
 
 ```python
 import foobar
