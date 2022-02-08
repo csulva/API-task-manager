@@ -4,22 +4,30 @@ The API Account Manager is a command-line application to help you create or main
 
 ## Imports
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
 ```python
-import requests
-import time
+import requests # To call the API
+import time # For the user interface
 ```
 
 ## Usage
 
-
+To call the API and return JSON data:
 ```python
 url = 'http://demo.codingnomads.co:8080/tasks_api/users'
+response = requests.get(url)
+data = response.json() # Dict of list of data
+```
+To access all account data as individual dictionaries, you must iterate or index through the data:
+```python
+for account in data['data']:
+  # access account information
+```
+Or
+```python
+account = data['data']
 ```
 
-```python
-import foobar
+
 
 # returns 'words'
 foobar.pluralize('word')
