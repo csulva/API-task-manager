@@ -17,6 +17,44 @@ url = 'http://demo.codingnomads.co:8080/tasks_api/users'
 response = requests.get(url)
 data = response.json() # Dict of list of data
 ```
+What the data looks like, including a couple accounts:
+```javascript
+{
+data: [
+  {
+    id: 1,
+    email: "harry@potter.com",
+    first_name: "Harry",
+    last_name: "Potter",
+    created_at: 1642541428000,
+    updated_at: 1644020694000
+  },
+  {
+    id: 2,
+    email: "ccallow1@xinhuanet.com",
+    first_name: "Corrinne",
+    last_name: "Callow",
+    created_at: 1642541428000,
+    updated_at: 1642541428000
+  },
+  {
+    id: 3,
+    email: "nwolland2@over-blog.com",
+    first_name: "Niall",
+    last_name: "Wolland",
+    created_at: 1642541428000,
+    updated_at: 1642541428000
+  },
+
+...
+
+error: {
+    message: "none"
+  },
+status: "200 OK"
+}
+```
+
 To access all account data as individual dictionaries, you must iterate or index through the data:
 ```python
 for account in data['data']:
