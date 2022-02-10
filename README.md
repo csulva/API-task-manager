@@ -9,7 +9,7 @@ import requests # To call the API
 import time # For the user interface
 ```
 
-## Usage
+# Usage
 
 To call the API and return JSON data:
 ```python
@@ -28,8 +28,7 @@ account = data['data']
 ```
 
 
-
-# returns 'words'
+## returns 'words'
 foobar.pluralize('word')
 
 # returns 'geese'
