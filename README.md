@@ -17,7 +17,7 @@ url = 'http://demo.codingnomads.co:8080/tasks_api/users'
 response = requests.get(url)
 data = response.json() # Dict of list of data
 ```
-What the data looks like, including a couple accounts:
+What the data looks like, including a few accounts:
 ```javascript
 {
 data: [
