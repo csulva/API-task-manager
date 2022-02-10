@@ -9,7 +9,7 @@ import requests # To call the API
 import time # For the user interface
 ```
 
-# Usage
+## Usage
 
 To call the API and return JSON data:
 ```python
@@ -66,10 +66,27 @@ account = data['data']
 ```
 
 
-## returns 'words'
-foobar.pluralize('word')
+### POST request - Create a new account
+If 1 is selected upon running the program, it will create a new account for the user based on the credentials asked:
+```python
+first = input('What is your first name? ')
+last = input('What is your last name? ')
+email = input('What is your email address? ')
+```
+Once the input has been given, the program will run the ```new account(first, last, email)``` function:
 
-# returns 'geese'
+```python
+body = {
+'first_name': first,
+'last_name': last,
+'email': email,
+}
+
+response = requests.post(url, json=body)
+```
+Based on the credentials, the API will post a new account. It will return a ```400``` error if the email already exists. The ID will be automatically given and is also unique. 
+
+### GET request - View account information
 foobar.pluralize('goose')
 
 # returns 'phenomenon'
