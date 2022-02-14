@@ -87,7 +87,8 @@ response = requests.post(url, json=body)
 Based on the credentials, the API will post a new account. It will return a ```400``` error if the email already exists. The ID will be automatically given and is also unique. 
 
 ### GET request - View account information
-foobar.pluralize('goose')
+
+### PUT request - Edit account information
 
 ## References
 [CodingNomads Python Web Development](https://codingnomads.co/career-track/professional-python-web-development-course)
