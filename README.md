@@ -89,13 +89,5 @@ Based on the credentials, the API will post a new account. It will return a ```4
 ### GET request - View account information
 foobar.pluralize('goose')
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
 ## References
 [CodingNomads Python Web Development](https://codingnomads.co/career-track/professional-python-web-development-course)
