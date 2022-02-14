@@ -90,5 +90,7 @@ Based on the credentials, the API will post a new account. It will return a ```4
 
 ### PUT request - Edit account information
 
+### DELETE request - Delete account 
+
 ## References
 [CodingNomads Python Web Development](https://codingnomads.co/career-track/professional-python-web-development-course)
