@@ -87,7 +87,7 @@ response = requests.post(url, json=body)
 Based on the credentials, the API will post a new account. It will return a ```400``` error if the email already exists. The ID will be automatically given and is also unique. 
 
 ### GET request - View account information
-If '2' is entered upon running the program, it will create a new account for the user based on email inputted:
+If '2' is entered upon running the program, it will create a new account for the user based on the email inputted:
 
 ```python
 email = input('What is your email address? ')
@@ -117,9 +117,38 @@ else:
 ```
 
 ### PUT request - Edit account information
-If '3' is entered upon running the program, it will create a new account for the user based on email inputted:
-
-
+If '3' is entered upon running the program, it will edit an account for the user based on the email inputted:
+```python
+email = input('Let me find your account information. What is your email address? ')
+```
+Once the input has been given, the program will run the ```update_account(email)``` function, which checks for an existing email using the  ```view_account_info(email)``` function previously described. If the email address doesn't exist, this function will not continue because the ```view_account_info(email)``` function will not be able to return an email and thus no account can be updated.
+If the email address can be found in the system, this function will also run the ```get_id(email)``` function to return the ID associated with the email address entered. It will then allow the user to update their first name, last name, and email address:
+```python
+print('Please update your information...')
+time.sleep(1)
+first = input('What is your first name? ')
+last = input('What is your last name? ')
+new_email = input('What is your email address? ')
+# Updates the account based on the ID and user input provided
+body = {
+    'id': id,
+    'first_name': first,
+    'last_name': last,
+    'email': new_email,
+}
+put_url = f'http://demo.codingnomads.co:8080/tasks_api/users/{id}'
+response = requests.put(put_url, json=body)
+# Prints successful -- will only get this far if the email exists (see view_account_info() function)
+print(response.status_code)
+if response.status_code == 201:
+    print('Your account has been successfully updated.')
+```
+If for some reason, the function runs all the way through but the request status code doesn't return 201 successfully, it will ask the user to try again:
+```python
+else:
+    print('Looks like there was an error updating the account. Please try again')
+    request()
+```
 
 ### DELETE request - Delete account 
 
