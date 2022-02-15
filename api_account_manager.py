@@ -70,9 +70,13 @@ def view_account_info(email):
         print("It doesn't appear you have an account based on the email address provided. Try again or try creating one with option 1.")
         quit()
     # If email is accessible in the API -- if it exists
-    else:
+    elif info[0]:
         print("Here is the info for the account associated with your email address: \n")
         print(account)
+    else:
+        response.status_code = 400
+        print(response.status_code)
+        print('Sorry there appears to be an error. Please try again.')
 
 def update_account(email):
     """PUT request -- This function lets the user update the account info based
