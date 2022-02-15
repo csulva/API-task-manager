@@ -73,7 +73,7 @@ first = input('What is your first name? ')
 last = input('What is your last name? ')
 email = input('What is your email address? ')
 ```
-Once the input has been given, the program will run the ```new account(first, last, email)``` function:
+Once the input has been given, the program will run the ```new_account(first, last, email)``` function:
 
 ```python
 body = {
@@ -87,6 +87,14 @@ response = requests.post(url, json=body)
 Based on the credentials, the API will post a new account. It will return a ```400``` error if the email already exists. The ID will be automatically given and is also unique. 
 
 ### GET request - View account information
+If 2 is selected upon running the program, it will create a new account for the user based on email inputted:
+
+```python
+email = input('What is your email address? ')
+```
+Once the input has been given, the program will run the ```view_account_info(email)``` function and if the email address can be found in the system, it will be returned and printed:
+
+
 
 ### PUT request - Edit account information
 
