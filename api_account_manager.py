@@ -113,7 +113,7 @@ def update_account(email):
         request()
 
 
-def delete_task(email):
+def delete_account(email):
     """DELETE request - deletes the user's account based on the email provided but first checks to
     make sure it is the right account before the user deletes it.
 
@@ -186,7 +186,7 @@ Please select from the following options (enter the number of the action you'd l
             print('You would like to delete your account. To do so I can look up your account based on your email address.')
             time.sleep(1)
             email = input('What is your email address? ')
-            delete_task(email)
+            delete_account(email)
             quit()
 
         else:
