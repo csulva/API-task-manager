@@ -152,6 +152,35 @@ else:
 ```
 
 ### DELETE request - Delete account 
+If '4' is entered upon running the program, it will edit an account for the user based on the email inputted:
+```python
+email = input('What is your email address? ')
+```
+Once the input has been given, the program will run the ```delete_account(email)``` function, which checks for an existing email using the  ```view_account_info(email)``` function previously described. If the email address doesn't exist, this function will not continue because the ```view_account_info(email)``` function will not be able to return an email and thus no account can be deleted.
+
+If the email address can be found in the system, this function will also run the ```get_id(email)``` function to return the ID associated with the email address entered. It will then print the account info so the user can verify that is the account they would like to delete:
+```python
+while True:
+    verify = input('If this is correct, hit the "enter" key now to delete your account. Otherwise, type "quit" to enter a new one... ').lower()
+```
+If the user hits enter, it will delete the account. Otherwise, if the user enters 'quit', the program will restart:
+```python
+while True:
+...
+    if verify == 'quit':
+        request()
+    # Hit enter/return to move forward with the DELETE request
+    elif verify == '':
+        # The call to the API, deletes the account based on the ID returned earlier (see get_id())
+        response = requests.delete(url + f'/{id}')
+        time.sleep(1)
+        print(response.status_code)
+        print(f'Successfully deleted account of "{email}" email address.')
+        quit()
+    # If "quit" is not typed, nor enter not clicked, it will ask again
+    else:
+        continue
+```
 
 ## References
 [CodingNomads Python Web Development](https://codingnomads.co/career-track/professional-python-web-development-course)
