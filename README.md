@@ -67,7 +67,7 @@ account = data['data']
 
 
 ### POST request - Create a new account
-If 1 is selected upon running the program, it will create a new account for the user based on the credentials asked:
+If '1' is entered upon running the program, it will create a new account for the user based on the credentials asked:
 ```python
 first = input('What is your first name? ')
 last = input('What is your last name? ')
@@ -87,7 +87,7 @@ response = requests.post(url, json=body)
 Based on the credentials, the API will post a new account. It will return a ```400``` error if the email already exists. The ID will be automatically given and is also unique. 
 
 ### GET request - View account information
-If 2 is selected upon running the program, it will create a new account for the user based on email inputted:
+If '2' is entered upon running the program, it will create a new account for the user based on email inputted:
 
 ```python
 email = input('What is your email address? ')
@@ -116,8 +116,10 @@ else:
       print('Sorry there appears to be an error. Please try again.')
 ```
 
-
 ### PUT request - Edit account information
+If '3' is entered upon running the program, it will create a new account for the user based on email inputted:
+
+
 
 ### DELETE request - Delete account 
 
