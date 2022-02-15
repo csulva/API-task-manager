@@ -93,7 +93,28 @@ If 2 is selected upon running the program, it will create a new account for the 
 email = input('What is your email address? ')
 ```
 Once the input has been given, the program will run the ```view_account_info(email)``` function and if the email address can be found in the system, it will be returned and printed:
-
+```python
+info = []
+...
+for account in data['data']:
+      if account['email'] == email:
+          info.append(account)
+...
+elif info[0]:
+      print("Here is the info for the account associated with your email address: \n")
+      print(account) # Returns JSON data for the account
+```
+Otherwise the function will return no account or a 400 error:
+```python
+if info == []:
+      print("It doesn't appear you have an account based on the email address provided. Try again or try creating one with option 1.")
+      quit()
+...
+else:
+      response.status_code = 400
+      print(response.status_code)
+      print('Sorry there appears to be an error. Please try again.')
+```
 
 
 ### PUT request - Edit account information
