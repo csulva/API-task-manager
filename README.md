@@ -122,6 +122,7 @@ If '3' is entered upon running the program, it will edit an account for the user
 email = input('Let me find your account information. What is your email address? ')
 ```
 Once the input has been given, the program will run the ```update_account(email)``` function, which checks for an existing email using the  ```view_account_info(email)``` function previously described. If the email address doesn't exist, this function will not continue because the ```view_account_info(email)``` function will not be able to return an email and thus no account can be updated.
+
 If the email address can be found in the system, this function will also run the ```get_id(email)``` function to return the ID associated with the email address entered. It will then allow the user to update their first name, last name, and email address:
 ```python
 print('Please update your information...')
@@ -143,7 +144,7 @@ print(response.status_code)
 if response.status_code == 201:
     print('Your account has been successfully updated.')
 ```
-If for some reason, the function runs all the way through but the request status code doesn't return 201 successfully, it will ask the user to try again:
+If for some reason, the function runs all the way through but the request status code doesn't return ```201``` successfully, it will ask the user to try again:
 ```python
 else:
     print('Looks like there was an error updating the account. Please try again')
